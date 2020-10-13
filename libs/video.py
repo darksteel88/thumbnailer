@@ -6,7 +6,9 @@ import datetime
 import ffmpeg
 import math
 import mimetypes
+import multiprocessing as mp
 import os
+import time
 
 def is_video(path):
     """Returns True/False depending on whether the file denoted by the path is a video"""
@@ -110,30 +112,13 @@ def generate_individual_thumbnails(filename, duration, num_thumbs, output_width,
         ss = 2*(start_pos * i) - (i-1)
         output_name = 'thumb{}'.format(str(i).zfill(4))
         if multi_processing:
-            processes.append(mp.Process(target=generate_ffmpeg_screen, args=(ss, filename, output_width, output_folder, output_name, file_format)))
+            proc = mp.Process(target=generate_ffmpeg_screen, args=(ss, filename, output_width, output_folder, output_name, file_format))
+            processes.append(proc)
+            proc.start()
         else:
             generate_ffmpeg_screen(ss, filename, output_width, output_folder, output_name, file_format)
 
     if multi_processing:
-        for p in processes:
-            p.start()
-
-        # TODO: actually implement this properly rather than a shitty hack
-        # in order to handle this getting stuck we implement a timeout loop
-        # if after X seconds it's still stuck then we just abort
-        start = time.time()
-        # 20 might be a bit long but it'll exit early anyway
-        while time.time() - start <= 20:
-            if not any(p.is_alive() for p in processes):
-                break
-
-        if any(p.is_alive() for p in processes):
-            print('Failed on {}'.format(filename))
-            for p in processes:
-                if p.is_alive():
-                    p.terminate()
-            return vframes_ratio, vframes_ratio
-
         for p in processes:
             p.join()
 
