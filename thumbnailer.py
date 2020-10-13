@@ -4,12 +4,12 @@ import sys
 
 from pprint import pprint
 
-from lib import innput # avoid name clash on reserved keyword
-from lib import folder
-from lib import video
-from lib import logger
-from lib import image
-from lib import helpers
+from libs import innput # avoid name clash on reserved keyword
+from libs import folder
+from libs import video
+from libs import logger
+from libs import image
+from libs import helpers
 
 ARGS = innput.get_argparse_input()
 
