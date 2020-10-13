@@ -76,7 +76,7 @@ def save_thumbnail(the_folder, name, file_format, columns=4, gap=0, scale_ratio=
     if len(images) % columns != 0:
         raise ValueError("Mismatch on column number for image set provided")
     rows = len(images) / columns
-    total_height = int((rows * heights[0]) + (gap * (rows+1)))
+    total_height = int((rows * heights[0]) + (gap * (rows)))
 
     # if we decide to put text at the top, add space for it and offset our starting position
     if text:
