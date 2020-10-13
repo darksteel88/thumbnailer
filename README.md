@@ -22,3 +22,16 @@
 
 ## Requirements
 The only required library to run this is [ffmpeg-python](https://pypi.org/project/ffmpeg-python/)
+
+## Samples
+`python thumbnailer.py -d -i "C:\Users\darksteel\Videos\thumbnailer_videos\The Boy and the Beast"`
+Use default settings and include the video information
+![sample 1](https://i.imgur.com/lI6kkhP.jpg)
+
+`python thumbnailer.py -t -g 0 -i "C:\Users\darksteel\Videos\thumbnailer_videos\The Boy and the Beast"`
+Set the gap to 0, disable timestamps, no video information
+![sample 2](https://i.imgur.com/Kka113z.jpg)
+
+`python thumbnailer.py -op tl -g 8 -d -w 2048 -r 3 -c 7 -i "C:\Users\darksteel\Videos\thumbnailer_videos\The Boy and the Beast"`
+Set the gap to 8, set the image to double wide at 2048, set to to 3x7 size, and put the timestamps in the top left
+![sample 3](https://i.imgur.com/jkWWMeJ.jpg)
