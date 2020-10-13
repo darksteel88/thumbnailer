@@ -41,8 +41,7 @@ def generate_thumbnail(video_file):
     if ARGS.timestamp:
         image.overlay_timestamps(start_pos, vframes_ratio, folder._get_thumbnail_list(the_folder), ARGS.overlay, scale_ratio)
 
-    if ARGS.details:
-        output_header_info = helpers.human_readable_header_info_to_str(helpers.human_readable_header_info(header_info))
+    output_header_info = helpers.human_readable_header_info_to_str(helpers.human_readable_header_info(header_info)) if ARGS.details else None
 
     new_name = folder.get_thumbnail_filename(header_info['filename'], ARGS.suffix)
 

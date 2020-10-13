@@ -66,7 +66,7 @@ def save_thumbnail(the_folder, name, file_format, columns=4, gap=0, scale_ratio=
     widths, heights = zip(*(i.size for i in images))
 
     x_offset = gap
-    y_offset = 0
+    y_offset = gap
     row_counter = 0
 
     total_width = int((widths[0] * columns) + (gap * (columns+1)))
@@ -81,7 +81,7 @@ def save_thumbnail(the_folder, name, file_format, columns=4, gap=0, scale_ratio=
     # if we decide to put text at the top, add space for it and offset our starting position
     if text:
         font_size = int(20 * scale_ratio)
-        y_offset = _get_header_height(font_size)
+        y_offset += _get_header_height(font_size)
         total_height += y_offset
 
     new_image = Image.new('RGB', (total_width, total_height))
